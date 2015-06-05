@@ -28,7 +28,6 @@ void main()
 		//AVLTree_init();
 		data = (DataType*)malloc(sizeof(DataType));
 		data->key = datas[i]; //rand() % 100;
-
 		printf("%d  ", data->key);
 		AVLTree_insert(&T, data, &state);
 	}
