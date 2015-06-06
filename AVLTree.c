@@ -32,7 +32,7 @@ Status AVLTree_search(AVLTree T, const KeyType key, DataType **e)
 
 void R_Rotate(AVLTree *T)
 {
-	AVLTreeNode *lc = (*T);
+	AVLTreeNode *lc;
 	lc = (*T)->lchild;
 	(*T)->lchild = lc->rchild;
 	lc->rchild = (*T);
@@ -41,9 +41,9 @@ void R_Rotate(AVLTree *T)
 
 void L_Rotate(AVLTree *T)
 {
-	AVLTreeNode *rc = (*T);
+	AVLTreeNode *rc;
 	rc = (*T)->rchild;
-	(*T)->rchild = rc->rchild;
+	(*T)->rchild = rc->lchild;
 	rc->lchild = (*T);
 	(*T) = rc;
 }
@@ -65,13 +65,13 @@ void LeftBalance(AVLTree *T)
 		 case RH:(*T)->bf = EH; lc->bf = LH; break;
 		 case EH:(*T)->bf = lc->bf = EH; break;
 		 }
-
 		 rc->bf = EH;
 		 L_Rotate(&(*T)->lchild);
 		 R_Rotate(T);
 		 break;
 	 }
 }
+
 
 void RightBalance(AVLTree *T)
 {
@@ -87,12 +87,12 @@ void RightBalance(AVLTree *T)
 		lc = rc->lchild;
 		switch (lc->bf)
 		{
-		case LH:(*T)->bf = LH; rc->bf = EH; break;
-		case RH:(*T)->bf = LH; lc->bf = EH; break;
+		case LH:(*T)->bf = EH; rc->bf = LH; break;
+		case RH:(*T)->bf = LH; rc->bf = EH; break;
 		case EH:(*T)->bf = rc->bf = EH; break;
 		}
 
-		rc->bf = EH;
+		lc->bf = EH;
 		R_Rotate(&(*T)->rchild);
 		L_Rotate(T);
 		break;
