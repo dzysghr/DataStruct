@@ -34,6 +34,8 @@ Status AVLTree_destroy(AVLTree T);
 Status AVLTree_search(AVLTree T,const KeyType key,DataType **e);
 Status AVLTree_insert(AVLTree *T, DataType *e,Status *taller);
 Status AVLTree_delete(AVLTree *T,KeyType key,DataType *e);
+int Length(AVLTree T);
+
 
 Status InOrderTraverse(AVLTree T, Status(*visit)(DataType e));
 Status PreOrderTraverse(AVLTree T, Status(*visit)(DataType e));
