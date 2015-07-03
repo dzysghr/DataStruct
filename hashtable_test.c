@@ -40,10 +40,10 @@ int Test()
 	int i, n, c;
 	float sum = 0;
 	char sign;
-
+	
 	char * string;
-	string = "dfasdfsadf";
-	puts(string);
+	//string = "dfasdfsadf";
+	//puts(string);
 
 	getchar();
 

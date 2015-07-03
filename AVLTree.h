@@ -1,4 +1,4 @@
-#ifndef AVLTREE
+﻿#ifndef AVLTREE
 #define AVLTREE
 #define Status int
 #define OK 1
@@ -15,9 +15,10 @@
 #define KeyType int
 
 
+//用户数据类型，为方便测试只有一个成员并作为关键字
 typedef struct Data{
-	KeyType key;
-	int num;
+	KeyType key;   //关键字
+	
 }DataType;
 
 
@@ -29,17 +30,31 @@ typedef struct AVLTreeNode{
 
 } *AVLTree, AVLTreeNode;
 
-Status AVLTree_init();
-Status AVLTree_destroy(AVLTree T);
-Status AVLTree_search(AVLTree T,const KeyType key,DataType **e);
+
+
+//销毁平衡二叉树
+void AVLTree_destroy(AVLTree T);
+
+//搜索关键字为key的树节点
+AVLTreeNode* AVLTree_search(AVLTree T, const KeyType key);
+
+//插入数据
 Status AVLTree_insert(AVLTree *T, DataType *e,Status *taller);
-Status AVLTree_delete(AVLTree *T,KeyType key,DataType *e);
-int Length(AVLTree T);
+//删除关键字为key的数据
+Status AVLTree_delete(AVLTree *T,KeyType key,int taller);
+//返回树的深度
+int AVLTree_level(AVLTree T);
+
+//关键字比较函数
+//key1>key2 return 1
+//key1<key2 return -1
+//key==key2 return 0
+int Compare(const KeyType key1,const KeyType key2);
 
 
-Status InOrderTraverse(AVLTree T, Status(*visit)(DataType e));
-Status PreOrderTraverse(AVLTree T, Status(*visit)(DataType e));
-
+Status InOrderTraverse(AVLTree T, Status(*visit)(DataType *e));
+Status PreOrderTraverse(AVLTree T, Status(*visit)(DataType *e));
+Status PostOrderTraverse(AVLTree T, Status(*visit)(DataType *e));
 
 void R_Rotate(AVLTree *T);
 void L_Rotate(AVLTree *T);

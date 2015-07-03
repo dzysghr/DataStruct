@@ -17,7 +17,6 @@ result  HT_init(HashTable *table, int MaxSize, int(*hash)(const KeyType key), in
 	{
 		return UNSUCCESS;
 	}
-
 	table->Size = MaxSize;
 	table->Count = 0;
 	table->match = match;
