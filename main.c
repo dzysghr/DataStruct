@@ -7,15 +7,17 @@
 void main()
 {
 	void displayBinTree(AVLTree T);
-	void print(AVLTree t, int n);
-	void display(AVLTree T);
-	void ShowTree(AVLTree t);
 	void menu();
 	void insert(AVLTree *T);
 	void delete(AVLTree T);
 	void visit(DataType *data);
 	void Traverse(AVLTree *T);
 	void addRadom(AVLTree *T);
+	void find(AVLTree *T);
+	//int Test();
+	//Test();
+	//return;
+
 
 	AVLTree T;
 	int i = 0;
@@ -23,27 +25,29 @@ void main()
 	srand((unsigned)time(NULL));
 	T = NULL;
 
-	int state = 0;
+	//int state = 0;
+	//int datas[5] = { 90, 24, 23, 52, 49 };
 
-	for (i = 0; i < 10; i++)
-	{
-		data = (DataType*)malloc(sizeof(DataType));
-	
-		data->key = rand() % 100;
-		printf("%d  ", data->key);
-		AVLTree_insert(&T, data, &state);
-	}
+
+	//for (i = 0; i < 5; i++)
+	//{
+	//	data = (DataType*)malloc(sizeof(DataType));
+	//
+	//	data->key = datas[i];//rand() % 100;
+	//	printf("%d  ", data->key);
+	//	AVLTree_insert(&T, data, &state);
+	//}
 	menu();
 	char ch;
-	
+
 	while (1)
 	{
-  	
+		printf("\n请输入相应的操作命令:");
 		ch = -1;
 		scanf("%c", &ch);
 		if (getchar() != '\n')
 		{
-			printf("Erro!!!please enter again:\n");
+			printf("操作失败，请重新输入:\n");
 			while (getchar() != '\n');
 			continue;
 		}
@@ -52,18 +56,50 @@ void main()
 		case 'e':return;
 		case 's':displayBinTree(T); break;
 		case 'c':system("cls"); break;
-		case 'm':menu(T); break;
+		case 'm':menu(); break;
 		case 'a':insert(&T); break;
 		case 'd':delete(&T); break;
 		case 'b':Traverse(&T); break;
-		case 'x':AVLTree_destroy(T); T = NULL; break;
-		case 'r':addRadom(T); break;
+		case 'x':AVLTree_destroy(T); T = NULL; printf("销毁成功\n"); break;
+		case 'r':addRadom(&T); break;
+		case 'f': find(T); break;
 		}
 	}
 	
 
 }
+//查找测试
+void find(AVLTree T)
+{
+	int num = 0;
+	int taller = 0;
+	printf("请输入要查找的关键字：\n");
+	scanf("%d", &num);
+	getchar();
+	AVLTreeNode *node = NULL;
+	node = AVLTree_search(T, num);
+	if (node)
+	{
+		printf("查找成功，当前结点为%d \n", node->data->key);
+		printf("左孩子:");
+		if (node->lchild != NULL)
+			printf("%d    ", node->lchild->data->key);
+		else
+			printf("不存在   ");
+		printf("右孩子:");
+		if (node->rchild != NULL)
+			printf("%d    \n", node->rchild->data->key);
+		else
+			printf("不存在   \n");
+	}
+	else
+		printf("找不到结点");
 
+
+}
+
+
+//随机插入测试
 void addRadom(AVLTree *T)
 {
 	int i,taller=0,n;
@@ -78,34 +114,27 @@ void addRadom(AVLTree *T)
 
 		data->key = rand() % 100;
 		printf("%d  ", data->key);
-		AVLTree_insert(&T, data, &taller);
+		AVLTree_insert(T, data, &taller);
 	}
 	printf("加入成功\n");
 }
+//删除操作测试
 void delete(AVLTree *T)
 {
 	DataType* data = NULL;
 	int num = 0;
 	int taller = 0;
 	data = (DataType*)malloc(sizeof(DataType));
-	while (1)
-	{
-		printf("please enter the number you want to delete：\n");
+		printf("请输入要删除的数：\n");
 		scanf("%d", &num);
 		getchar();
 		data->key = num;
 		if (OK == AVLTree_delete(T, num, &taller))
-		{
-			printf("delete susseed!\n");
-			break;
-		}
+			printf("删除成功 \n");
 		else
-		{
-			printf("delete fail! \n");
-			break;
-		}
-	}
+			printf("删除失败! \n");
 }
+//插入操作测试
 void insert(AVLTree *T)
 {
 	DataType* data = NULL;
@@ -114,22 +143,23 @@ void insert(AVLTree *T)
 	data = (DataType*)malloc(sizeof(DataType));
 	while (1)
 	{
-		printf("please enter the number you want to insert：\n");
+		printf("请输入要插入的数：\n");
 		scanf("%d", &num);
 		getchar();
 		data->key = num;
 		if (OK == AVLTree_insert(T, data, &taller))
 		{
-			printf("insert susseed!\n");
+			printf("插入成功!\n");
 			break;
 		}
 		else
 		{
-			printf("insert fail !");
+			printf("插入失败!\n");
 			break;
 		}
 	}
 }
+//遍历操作测试
 void Traverse(AVLTree *T)
 {
 	printf("先序遍历：");
@@ -143,11 +173,11 @@ void Traverse(AVLTree *T)
 	printf("\n");
 
 }
+//访问函数
 void visit(DataType *data)
 {
 	printf("%d  ", data->key);
 }
-
 
 //菜单显示
 void menu()
@@ -181,8 +211,8 @@ void displayBinTree(AVLTree T)
 	{
 		printf("当前二叉树为空树\n");
 	}
-	dep = AVLTree_level(T);
-	printf("树的深度为%d\n", dep);
+	dep = AVLTree_level(T); 
+	printf("   树的深度为%d                       平衡因子\n", dep);
 	if (T != NULL)
 	{
 		top = 1;

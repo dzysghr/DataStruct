@@ -45,6 +45,13 @@ result HT_insert(HashTable *table, const RcdType data,int *c);
 //É¾³ýÊý¾Ý
 result HT_remove(HashTable *table, KeyType key, RcdType *data);
 
+int HashSquare(KeyType key);
+
+int Hash(KeyType key);
+
+bool match(KeyType key1, KeyType key2);
+
+
 
 
 

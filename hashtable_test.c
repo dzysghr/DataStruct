@@ -1,34 +1,9 @@
-#include <stdio.h>
+ï»¿#include <stdio.h>
 #include "list.h"
-#include "stack.h"
-#include "queue.h"
-#include "set.h"
-#include "cqueue.h"
+
 #include "hashtable.h"
 
 #define MAXSIZE 1000
-
-bool match(KeyType key1, KeyType key2)
-{
-	return key1 == key2 ? TRUE : FALSE;
-}
-
-//³ýÁôÓàÊý·¨
-int Hash(KeyType key)
-{
-	return key % 997;
-}
-
-
-//Æ½·½È¡ÖÐ·¨
-int HashSquare(KeyType key)
-{
-	long temp;
-	temp = key*key / 100;
-	if (temp > 1000)
-		temp = temp % 1000;
-	return temp;
-}
 
 
 
@@ -54,17 +29,17 @@ int Test()
 
 	srand((unsigned)time(NULL));
 	
-	for (i = 0; i < 800; i++)
+	for (i = 0; i < 10; i++)
 	{
 		RcdType new;
 		new.key = rand();
 		//HT_insert(h, new, &c);
 
 		if (SUCCESS == HT_insert(h, new, &c))
-			printf("²åÈë³É¹¦£¬³åÍ»´ÎÊý£º%d \n", c);
+			printf("æ’å…¥æˆåŠŸï¼Œå†²çªæ¬¡æ•°ï¼š%d \n", c);
 		sum += c;
 	}
-	printf("Æ½¾ùÃ¿´Î²åÈë³åÍ»£º%f ´Î\n", sum / 800);
+	printf("å¹³å‡æ¯æ¬¡æ’å…¥å†²çªï¼š%f æ¬¡\n", sum / 800);
 	//ShowAll(h);
 
 	while (1)
@@ -76,7 +51,7 @@ int Test()
 			RcdType new;
 			new.key = n;
 			if (SUCCESS == HT_insert(h, new, &c))
-				printf("²åÈë³É¹¦£¬³åÍ»´ÎÊý£º%d\n", c);
+				printf("æ’å…¥æˆåŠŸï¼Œå†²çªæ¬¡æ•°ï¼š%d\n", c);
 			ShowAll(h);
 		}
 		else if (sign == '-')
@@ -84,11 +59,11 @@ int Test()
 			RcdType new;
 			if (SUCCESS == HT_remove(h, n, &new))
 			{
-				printf("É¾³ýºÍÔªËØÎª key:%d\n", new.key);
+				printf("åˆ é™¤å’Œå…ƒç´ ä¸º key:%d\n", new.key);
 			}
 			else
 			{
-				printf("key=%d µÄÔªËØ²»´æÔÚ\n", n);
+				printf("key=%d çš„å…ƒç´ ä¸å­˜åœ¨\n", n);
 			}
 			ShowAll(h);
 		}

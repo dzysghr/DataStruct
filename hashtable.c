@@ -1,4 +1,4 @@
-#include "hashtable.h"
+ï»¿#include "hashtable.h"
 #include <stdlib.h>
 
 HashTable * HT_Create()
@@ -7,12 +7,12 @@ HashTable * HT_Create()
 }
 
 
-//³õÊ¼»¯
+//åˆå§‹åŒ–
 result  HT_init(HashTable *table, int MaxSize, int(*hash)(const KeyType key), int(*match)(const KeyType key1, const KeyType key2))
 {
 	int i;
 
-
+	
 	if (table == NULL || hash == NULL || match == NULL)
 	{
 		return UNSUCCESS;
@@ -36,7 +36,7 @@ result  HT_init(HashTable *table, int MaxSize, int(*hash)(const KeyType key), in
 	return SUCCESS;
 }
 
-//Ïú»Ù
+//é”€æ¯
 result HT_destroy(HashTable *table)
 {
 	
@@ -46,7 +46,7 @@ result HT_destroy(HashTable *table)
 }
 
 
-//ËÑË÷
+//æœç´¢
 result HT_search(HashTable *table, KeyType key, int* position,int* c)
 {
 	int p, i=0;
@@ -71,10 +71,10 @@ result HT_search(HashTable *table, KeyType key, int* position,int* c)
 		
 }
 
-//²åÈë
+//æ’å…¥
 result HT_insert(HashTable *table, const RcdType data,int *c)
 {
-	int p;
+	int p=0;
 	if (table->Count == table->Size || HT_search(table, data.key, &p,c) == SUCCESS)
 	{
 		return UNSUCCESS;
@@ -88,7 +88,7 @@ result HT_insert(HashTable *table, const RcdType data,int *c)
 	}
 }
 
-//É¾³ý
+//åˆ é™¤
 result HT_remove(HashTable *table,KeyType key, RcdType *data)
 {
 	int p, c;
@@ -105,3 +105,24 @@ result HT_remove(HashTable *table,KeyType key, RcdType *data)
 	}
 }
 
+bool match(KeyType key1, KeyType key2)
+{
+	return key1 == key2 ? TRUE : FALSE;
+}
+
+//é™¤ç•™ä½™æ•°æ³•
+int Hash(KeyType key)
+{
+	return key % 997;
+}
+
+
+//å¹³æ–¹å–ä¸­æ³•
+int HashSquare(KeyType key)
+{
+	long temp;
+	temp = key*key / 100;
+	if (temp > 1000)
+		temp = temp % 1000;
+	return temp;
+}

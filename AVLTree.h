@@ -22,14 +22,12 @@ typedef struct Data{
 }DataType;
 
 
-
 typedef struct AVLTreeNode{
 	DataType *data;
 	int bf;
 	struct AVLTreeNode *lchild, *rchild;
 
 } *AVLTree, AVLTreeNode;
-
 
 
 //销毁平衡二叉树
