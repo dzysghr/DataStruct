@@ -59,4 +59,11 @@ void L_Rotate(AVLTree *T);
 void LeftBalance(AVLTree *T);
 void RightBalance(AVLTree *T);
 
+void LeftBalance_div(AVLTree *p, int *shorter);//删除结点时左平衡旋转处理
+void RightBalance_div(AVLTree *p, int *shorter);//删除结点时右平衡旋转处理
+void Delete(AVLTree q, AVLTree *r, int *shorter);//删除结点
+int  DeleteAVL(AVLTree *p, int x, int *shorter);//平衡二叉树的删除操作
+
+int deleteAVL(AVLTree *t, KeyType key, int* shorter);
+
 #endif
